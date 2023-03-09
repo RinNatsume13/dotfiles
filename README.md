@@ -33,4 +33,4 @@ and in normal mode, type `:PlugInstall`.
 
 After this, just install the follow extension:
 
-[Extention](img/gnome-extention.png)
+![Extention](img/gnome-extention.png)
