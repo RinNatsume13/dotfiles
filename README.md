@@ -1,5 +1,27 @@
 # My personal configuration files :D
 
+## Shell
+
+I use Fish shell with [this script](https://github.com/IlanCosman/tide).
+
+To set Fish as default shell, type this command:
+
+```
+chsh -s /usr/bin/fish
+```
+Or, this if to set exclusive for gnome terminal:
+```
+gnome-terminal -e fish
+```
+
+
+Change original greeting with:
+
+```
+set -U fish_greeting
+```
+
+
 ## Neovim
 
 **Packages to install before:**
