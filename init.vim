@@ -7,15 +7,10 @@
 :set softtabstop=4
 :set mouse=a
 :set clipboard+=unnamedplus
+:set formatoptions+=q
 
-autocmd BufNewFile,BufRead *.qmd set filetype=markdown
+" autocmd BufNewFile,BufRead *.qmd set filetype=markdown
 
-
-
-" autocmd FileType markdown setl coc_filetype=tex
-" let g:coc_filetype_blacklist = {
-"     \ 'markdown': 1,
-"     \ }
 
 call plug#begin()
 
@@ -29,21 +24,27 @@ Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
 Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
 Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
 Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors (This is out dated)
+Plug 'vim-latex/vim-latex'
+Plug 'folke/tokyonight.nvim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors (This is out dated)
 " Look into https://github.com/mg979/vim-visual-multi for multi cursors
 
-Plug 'vim-latex/vim-latex'
-
+Plug 'EdenEast/nightfox.nvim' 
+Plug 'navarasu/onedark.nvim'
+Plug 'sainnhe/sonokai'
+Plug 'tribela/vim-transparent'
+Plug 'vim-airline/vim-airline-themes'
 
 " Telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" Plug 'jackguo380/vim-lsp-cxx-highlight' " C++ highlight
 
-" Tab
+" Tab'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 
@@ -53,15 +54,27 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'matze/vim-move'
 
-" Plug 'jmbuhr/otter.nvim'
 
 set encoding=UTF-8
 
 
 call plug#end()
 
+let g:tokyonight_colors = { 'line_number': 'black', 'cursorline_number': 'black' }
+" colorscheme tokyonight
+" colorscheme tokyonight-night
+" colorscheme tokyonight-storm
+" colorscheme tokyonight-day
+" colorscheme tokyonight-moon
+colorscheme nightfox
+" colorscheme sonokai 
+" colorscheme onedark
 
-colorscheme tokyonight
+let g:airline#extensions#tabline#enabled = 2
+let g:airline_powerline_fonts = 1
+
+let g:airline_theme='luna'
+
 
 highlight Normal guibg=rgba:0,0,0,0.5
 " autocmd FileType nerdtree highlight NERDTree guibg=rgba:0,0,0,0.5
@@ -86,25 +99,15 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <silent>    <A-,> <Cmd>BufferPrevious<CR>
 nnoremap <silent>    <A-.> <Cmd>BufferNext<CR>
 
-" Pin/unpin buffer
-" nnoremap <silent>    <A-;> <Cmd>BufferPin<CR>
 
 " Close buffer
 nnoremap <silent>    <A-c> <Cmd>BufferClose<CR>
 
 
-" <Tab>: completion
-" inoremap <silent><expr> <Tab>
-"     \ pumvisible() ? "\<C-N>" :
-"     \ s:check_back_space() ? "\<Tab>" :
-"     \ coc#refresh()
-" " <S-Tab>: completion back
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
-" <CR>: confirm completion, or insert <CR>
-" inoremap <expr> <CR> pumvisible() ? "\<C-c>" : "\<CR>"
 
+" Use <CR> to select a completion item.
+" inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<cr>"
 inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
-inoremap <silent><expr> <cr> "\<c-g>u\<CR>"
 
 function! s:check_back_space() abort
     let col = col('.') - 1
